@@ -3,6 +3,7 @@ import { Image, TextInput, Text, View, StyleSheet, Button } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import customers from '../customers';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Picker } from '@react-native-picker/picker';
 
 let options = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
 
@@ -12,6 +13,7 @@ export const Notice = (props) => {
     const [show, setShow] = useState(false);
     const [writedDate, setWritedDate] = useState("");
     const [inputValue, setInputValue] = useState('Rédigez votre message ici');
+    const [customer, setCustomer] = useState("")
 
     const showDatepicker = () => {
         setShow(true);
@@ -34,7 +36,23 @@ export const Notice = (props) => {
                     <Image style={{width: 200, height:80, alignSelf:"center"}} source={require("../assets/logo-clean3000.png")}/>
                     <Text style={{fontSize:20, fontWeight:"bold", alignSelf:"center", textDecorationLine:"underline", textTransform: "uppercase", paddingBottom:30}}>Avis de passage</Text>
                     <View style={styles.noticeSection}>
-                        <Text>Nom de l'entreprise/client: {customers[0].name}</Text>
+                        <Text>Nom de l'entreprise/client:</Text>
+
+                        <Picker
+                            selectedValue={customer}
+                            style={{height: 50, width: 100}}
+                            onValueChange={(itemValue, itemIndex) =>
+                                setCustomer(itemValue)
+                            }
+                            dropdownIconColor="#3d3d33"
+                        >
+                            <Picker.Item label={customers[0].name} value={customers[0].name} />
+                            <Picker.Item label={customers[1].name} value={customers[1].name} />
+                            <Picker.Item label={customers[2].name} value={customers[1].name} />
+                            <Picker.Item label={customers[3].name} value={customers[1].name} />
+                            <Picker.Item label={customers[4].name} value={customers[1].name} />
+                        </Picker>
+
                         <Text>Notre technicien est intervenu pour l'entretien de la vitretrie le {writedDate}</Text>
                         <Text style={styles.button} onPress={showDatepicker}>Choisir une date</Text>                        
                         {show && (
