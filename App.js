@@ -5,6 +5,7 @@ import { LogoTitle } from './src/LogoTitle';
 import { Home } from './src/Home';
 import { Notice } from './src/Notice';
 import { Problem } from './src/Problem';
+import { FinalizedNotice } from './src/FinalizedNotice';
 
 const Stack = createStackNavigator();
 
@@ -48,6 +49,15 @@ export default function App() {
             options={{
               headerTitle: 'Signaler un problème',
               headerBackTitle:"Acceuil"
+            }}
+          />
+
+          <Stack.Screen 
+            name="FinalizedNotice" 
+            component={FinalizedNotice}
+            options={{
+              headerTitle: 'Votre avis de passage',
+              headerBackTitle:"Retour"
             }}
           />
 

@@ -4,10 +4,14 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import customers from '../customers';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-export const Notice = () => {
+let options = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
+
+export const Notice = (props) => {
 
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
+    const [writedDate, setWritedDate] = useState("");
+    const [inputValue, setInputValue] = useState('Rédigez votre message ici');
 
     const showDatepicker = () => {
         setShow(true);
@@ -17,6 +21,7 @@ export const Notice = () => {
         const currentDate = selectedDate || date;
         setShow(false);
         setDate(currentDate);
+        setWritedDate(date.toLocaleDateString("en-US", options));
       };
 
     return (
@@ -27,11 +32,11 @@ export const Notice = () => {
                     //onPress={() => alert("Imprimer votre avis de passage")}
                 >
                     <Image style={{width: 200, height:80, alignSelf:"center"}} source={require("../assets/logo-clean3000.png")}/>
-                    <Text style={{fontSize:20, fontWeight:"bold", alignSelf:"center", textDecorationLine:"underline", paddingBottom:30}}>Avis de passage</Text>
+                    <Text style={{fontSize:20, fontWeight:"bold", alignSelf:"center", textDecorationLine:"underline", textTransform: "uppercase", paddingBottom:30}}>Avis de passage</Text>
                     <View style={styles.noticeSection}>
-                        <Text>Client : {customers[0].name}</Text>
-                        <Text>Notre technicien est intervenu pour l'entretien de la vitretrie le :</Text>
-                        <Button onPress={showDatepicker} title="Choisir une date" />
+                        <Text>Nom de l'entreprise/client: {customers[0].name}</Text>
+                        <Text>Notre technicien est intervenu pour l'entretien de la vitretrie le {writedDate}</Text>
+                        <Text style={styles.button} onPress={showDatepicker}>Choisir une date</Text>                        
                         {show && (
                             <DateTimePicker
                                 testID="dateTimePicker"
@@ -45,13 +50,13 @@ export const Notice = () => {
                             />
                         )}
                         <Text>Observations :</Text>
-                        <TextInput style={styles.input}></TextInput>
-                        <Text>Merci de votre confiance.</Text>
+                        <TextInput 
+                            style={styles.input}
+                            onChangeText={text => setInputValue(text)}
+                            value={inputValue}
+                        />
+                        <Text style={styles.button} onPress={() => props.navigation.navigate("FinalizedNotice", {writedDate, inputValue})}>Editer l'avis de passage</Text>
                     </View>
-
-
-
-
 
                 </TouchableOpacity>
             </View>
@@ -88,6 +93,16 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
         justifyContent:"center"
+    },
+    button: {
+        backgroundColor:"#3d3d33",
+        borderRadius:15,
+        borderWidth: 2,
+        color:"white",
+        textAlign:"center",
+        width:"50%",
+        alignSelf:"center"
+
     },
     input:{
         height: 100, 
