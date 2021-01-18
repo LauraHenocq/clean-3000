@@ -1,0 +1,12 @@
+{
+  "name": "clean-3000",
+  "displayName": "clean-3000",
+  "expo": {
+    "name": "clean-3000",
+    "slug": "clean-3000",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
