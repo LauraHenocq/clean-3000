@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { LogoTitle } from './src/LogoTitle';
 import { Home } from './src/Home';
 import { Notice } from './src/Notice';
+import { Problem } from './src/Problem';
 
 const Stack = createStackNavigator();
 
@@ -15,7 +16,7 @@ export default function App() {
           title: 'Clean 3000',
           headerStyle: {
               backgroundColor: '#3d3d33',
-              height:50
+              height:60
           },
           headerTintColor: '#5cba47',
           headerTitleStyle: {
@@ -25,20 +26,29 @@ export default function App() {
         }}>
 
           <Stack.Screen 
-          name="Home" 
-          component={Home} 
-          options={{
-            headerTitle: () => <LogoTitle/>
-          }}
+            name="Home" 
+            component={Home} 
+            options={{
+              headerTitle: () => <LogoTitle/>
+            }}
           />
 
           <Stack.Screen 
-          name="Notice" 
-          component={Notice}
-          options={{
-            headerTitle: 'Avis de passage',
-            headerBackTitle:"Acceuil"
-          }}
+            name="Notice" 
+            component={Notice}
+            options={{
+              headerTitle: 'Avis de passage',
+              headerBackTitle:"Acceuil"
+            }}
+          />
+
+          <Stack.Screen 
+            name="Problem" 
+            component={Problem}
+            options={{
+              headerTitle: 'Signaler un problème',
+              headerBackTitle:"Acceuil"
+            }}
           />
 
       </Stack.Navigator>
