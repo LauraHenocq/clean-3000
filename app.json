@@ -7,6 +7,12 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "icon": "./assets/logo-clean3000-mini.png",
+    "splash": {
+      "image": "./assets/logo-clean3000.png",
+      "resizeMode":"contain",
+      "backgroundColor":"#3d3d33"
+    }
   }
 }
